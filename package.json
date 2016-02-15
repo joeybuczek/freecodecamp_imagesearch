@@ -1,0 +1,15 @@
+{
+  "name": "imagesearch",
+  "version": "1.0.0",
+  "description": "Image Search Abstraction Layer - Free Code Camp Challenge",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Joey Buczek <joe.buczek@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongodb": "^2.1.7"
+  }
+}
