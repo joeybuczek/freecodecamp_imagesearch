@@ -1,12 +1,8 @@
 // module vars
-var mongo = require('mongodb').MongoClient;
 var express = require('express');
+var mongoFn = require('./mongoFn');
 // routes vars
 var routes = require('./routes');
-// env vars - import local if not on production
-if (!process.env.MONGO_URL) { 
-    require('./env'); 
- }
 
 
 // server creation
