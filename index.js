@@ -1,29 +1,24 @@
-// modules
+// module vars
 var mongo = require('mongodb').MongoClient;
 var express = require('express');
-
+// routes vars
+var routes = require('./routes');
 // env vars - import local if not on production
-if (!process.env.MONGO_URL) {
-    require('./env');
-}
+if (!process.env.MONGO_URL) { 
+    require('./env'); 
+ }
 
-// server
+
+// server creation
 var app = express();
 
 
-// routes =============================
-var htmlHome = "<h2>Image Search</h2>";
-
-app.get('/', function (req, res) {
-    res.send(htmlHome);
-});
-
-
-
+// routes assignment
+app.use('/', routes);
 
 
 // LISTEN
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log("Now listening on port " + port);
 });
