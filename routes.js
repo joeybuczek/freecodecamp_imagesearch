@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
+var mongoFn = require('./mongoFn');
 
 // home page
 router.get('/', function (req, res) {
     res.send(htmlHome);
 });
 
-// 2-17-16 need incoming search route
+// 2-18-16 need incoming search route - imgur api?
 router.get(/^\/api\/imagesearch+/i, function (req, res) {
     
     var searchFor = req.param('searchfor');
@@ -15,11 +16,23 @@ router.get(/^\/api\/imagesearch+/i, function (req, res) {
     
 });
 
-// 2-17-16 incoming latest search route
+// incoming latest search route
 router.get(/^\/api\/latest\/imagesearch+/i, function (req, res) {
     
-    res.send("Here are your latest searches...");
+    mongoFn.latestSearch(function(results){
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(results, null, 4));
+    });
     
+    //res.send("Here are your latest searches...");
+    
+});
+
+// 2-17-16 testing mongo insert - this will eventually be functionality for new image search
+router.get(/^\/test+/i, function(req, res){
+    mongoFn.insertSearch("iceland", function(result){
+        res.send('The result of the insert is: ' + result);
+    });
 });
 
 

@@ -17,7 +17,7 @@ app.use(function(req, res){
     res.send("404 - Sorry, we were unable to locate what you were looking for.");
 });
 
-// LISTEN
+// listen
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log("Now listening on port " + port);
