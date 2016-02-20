@@ -62,8 +62,8 @@ var htmlHome = "<h2>Image Search Tool</h2>" +
                "<pre style='color:royalblue;'>searchfor=&lt;yourSearchCriteria&gt;</pre>" +
                "<pre style='color:royalblue;'>offset=&lt;pageNumberOfResults&gt;</pre>" +
                "<b>Example Searches:</b>" +
-               "<pre style='color:royalblue;'>/api/imagesearch?searchfor=iceland&offset=1</pre>" + 
-               "<pre style='color:royalblue;'>/api/imagesearch?searchfor=reykjavik&offset=5</pre>" +
+               "<pre style='color:royalblue;'>https://fcc-imagesearchtool.herokuapp.com/api/imagesearch?searchfor=iceland&offset=1</pre>" + 
+               "<pre style='color:royalblue;'>https://fcc-imagesearchtool.herokuapp.com/api/imagesearch?searchfor=reykjavik&offset=5</pre>" +
                "<p>To see the latest image searches, use the following path: <span style='color:royalblue;'>/api/latest/imagesearch</span>. " + 
                "The response will be a JSON object.</p>";
 
