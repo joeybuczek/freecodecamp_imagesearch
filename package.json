@@ -9,6 +9,7 @@
   "author": "Joey Buczek <joe.buczek@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bing.search": "^1.0.1",
     "express": "^4.13.4",
     "mongodb": "^2.1.7"
   }
