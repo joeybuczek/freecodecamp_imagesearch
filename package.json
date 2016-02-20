@@ -1,10 +1,17 @@
 {
   "name": "imagesearch",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "engines": {
+    "node": "4.1.1"
+  },
   "description": "Image Search Abstraction Layer - Free Code Camp Challenge",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joeybuczek/freecodecamp_imagesearch"
   },
   "author": "Joey Buczek <joe.buczek@gmail.com>",
   "license": "ISC",
