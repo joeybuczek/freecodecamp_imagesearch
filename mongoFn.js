@@ -8,25 +8,6 @@ var mongoUrl = process.env.MONGO_URL;
  // exports var
  var mongoFn = {};
  
- // mongo functions
- mongoFn.connectionTest = function (str) {
-    mongo.connect(mongoUrl, function (err, db) {
-        
-        // handle err
-        if (err) throw err;
-        
-        // normal
-        var searchdata = db.collection('searchdata');
-        var query = {};
-        searchdata.find(query).toArray(function (err, docs) {
-            
-            console.log('There are ' + docs.length + ' in this collection: ' + str);
-            db.close();
-            
-        });
-    });  
- };
- 
  // inserts a search string and date into the db - accepts string & callback, returns boolean
  mongoFn.insertSearch = function (searchFor, callback) {
      mongo.connect(mongoUrl, function (err, db) {
@@ -74,6 +55,42 @@ var mongoUrl = process.env.MONGO_URL;
            }
        });   
    });  
+ };
+ 
+ // database cleanup - only allow 10 items in the database
+ mongoFn.databaseCleanup = function () {
+     mongo.connect(mongoUrl, function (err, db) {
+         
+         // handle err
+         if (err) console.log("Unable to connect to database for cleanup.");
+         
+         // normal - sort by date descending before retrieval
+         var searchdata = db.collection('searchdata');
+         var sort = { '$sort' : { 'searchDate': -1 } };
+         var project = { '$project': { 'searchDate': 1, 'searchFor': 1 } };
+         
+         searchdata.aggregate([sort, project]).toArray(function (err, docs) {
+             // handle err
+            if (err) {
+                console.log("Unable to retrieve database collection");
+                db.close();
+            }
+            // normal
+            if (docs.length <= 10) {
+                // Database records at 10 or less.
+                db.close();
+            } else {
+                // remove docs with dates earlier than the 10th document object (older searches)
+                var removeMatch = { 'searchDate' : { '$lt' : docs[9].searchDate } };
+                searchdata.deleteMany(removeMatch, function (err, results) {
+                    // handle err
+                    if (err) console.log('Unable to remove document(s).');
+                    // normal
+                    db.close();
+                });
+            }
+         });
+     });
  };
  
  // module exports

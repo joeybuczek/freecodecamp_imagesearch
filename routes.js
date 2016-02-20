@@ -7,12 +7,15 @@ router.get('/', function (req, res) {
     res.send(htmlHome);
 });
 
-// 2-18-16 need incoming search route - imgur api?
+// 2-19-16 need incoming search route - imgur api?
 router.get(/^\/api\/imagesearch+/i, function (req, res) {
     
     var searchFor = req.param('searchfor');
     var page = req.param('offset');
     res.send("You're searching for: " + searchFor + " with this many pages: " + page);
+    
+    // perform db cleanup
+    // mongoFn.databaseCleanup();
     
 });
 
@@ -24,13 +27,14 @@ router.get(/^\/api\/latest\/imagesearch+/i, function (req, res) {
         res.send(JSON.stringify(results, null, 4));
     });
     
-    //res.send("Here are your latest searches...");
+    // perform db cleanup
+    mongoFn.databaseCleanup();
     
 });
 
-// 2-17-16 testing mongo insert - this will eventually be functionality for new image search
+// 2-19-16 testing mongo insert - this will eventually be functionality for new image search
 router.get(/^\/test+/i, function(req, res){
-    mongoFn.insertSearch("iceland", function(result){
+    mongoFn.insertSearch("iceland test", function(result){
         res.send('The result of the insert is: ' + result);
     });
 });
