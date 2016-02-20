@@ -8,11 +8,11 @@ To perform a new search, append the following criteria to the `/api/imagesearch`
 
     - `searchfor=<yourSearchCriteria>`
     
-    - `offset=<pageNumberOfResults>`
+    - `offset=<pageNumberOfResults>` *optional - defaults to first page*
     
 ** Example Searches **
 
-`/api/imagesearch?searchfor=iceland&offset=1`
+`/api/imagesearch?searchfor=iceland`
 
 `/api/imagesearch?searchfor=reykjavik&offset=5`
 
