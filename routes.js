@@ -1,3 +1,6 @@
+// handles all routing
+
+// module vars
 var express = require('express');
 var router = express.Router();
 var mongoFn = require('./mongoFn');
@@ -11,7 +14,7 @@ router.get('/', function (req, res) {
 router.get(/^\/api\/imagesearch+/i, function (req, res) {
     
     var searchFor = req.param('searchfor');
-    var page = req.param('offset');
+    var page = req.param('offset') || 1;
     res.send("You're searching for: " + searchFor + " with this many pages: " + page);
     
     // perform db cleanup
